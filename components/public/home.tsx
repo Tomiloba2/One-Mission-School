@@ -97,7 +97,7 @@ export function PublicHome(props: IHomeHeroProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{once:true}}
-                className='relative w-full h-[50vh] min-h-100 overflow-hidden'>
+                className='relative w-full h-[50vh] min-h-125'>
                 <Carousel
                     plugins={[plugin.current]}
                     className='w-full h-full'

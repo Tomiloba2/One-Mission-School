@@ -4,7 +4,7 @@ import * as React from 'react';
 import Link from "next/link";
 import { Menu, X } from 'lucide-react'
 import { Button } from '../ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet';
 import { usePathname } from "next/navigation"
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
@@ -60,18 +60,19 @@ export function Navbar(props: INavBarProps) {
                     <div id="auth" className='hidden items-center gap-4 md:flex'>
                         <Button className='bg-brand-primary hover:bg-blue-700' size={'sm'}>
                             <Link href={'/login'} className='text-base p-4'>
-                                            Get Started
-                                        </Link>
+                                Get Started
+                            </Link>
                         </Button>
                     </div>
                     {/* mobile menu trigger */}
                     <Sheet open={open} onOpenChange={setOpen}>
                         <SheetTrigger asChild className='md:hidden'>
-                            <Button variant={'ghost'} size={'icon-lg'}>
-                                <Menu className='h-10 w-10 text-brand-primary' />
+                            <Button variant={'ghost'} size={'icon-lg'} className='h-12 w-12 bg-transparent'>
+                                <Menu className='size-6 text-brand-primary' />
                             </Button>
                         </SheetTrigger>
                         <SheetContent side='left' className='w-75 sm:w-100'>
+                            <SheetTitle></SheetTitle>
                             <div className='flex flex-col gap-6 py-8 px-5'>
                                 <div className='flex flex-col gap-4'>
                                     {routes.map((item) => {
@@ -88,7 +89,7 @@ export function Navbar(props: INavBarProps) {
                                     })}
                                 </div>
                                 <div id="mobile-auth" className='flex flex-col gap-3 pt-4 border-t'>
-                                    <Button asChild className='bg-blue-500 hover:bg-blue-700' size={'sm'} onClick={() => setOpen(false)}>
+                                    <Button asChild className='bg-brand-primary hover:bg-blue-800' size={'sm'} onClick={() => setOpen(false)}>
                                         <Link href={'/login'} className='text-white'>
                                             Get Started
                                         </Link>
