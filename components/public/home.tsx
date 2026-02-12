@@ -97,7 +97,7 @@ export function PublicHome(props: IHomeHeroProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
                 viewport={{once:true}}
-                className='relative w-full h-[50vh] min-h-125'>
+                className='relative w-full h:150 md:h-100'>
                 <Carousel
                     plugins={[plugin.current]}
                     className='w-full h-full'
@@ -121,7 +121,7 @@ export function PublicHome(props: IHomeHeroProps) {
                                         {/* gradient overlay */}
                                         <div className="absolute inset-0 bg-linear-to-t from-black/30 via-black/10 to-transparent z-10" />
                                         {/* content */}
-                                        <div className='relative z-20 h-full flex flex-col items-center justify-center py-8 text-center text-white px-6 md:px-12 max-w-5xl mx-auto'>
+                                        <div className='relative z-20 h-full flex flex-col items-center justify-center py-4 md:py-8 text-center text-white px-6 md:px-12 max-w-5xl mx-auto'>
                                             <div className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 drop-shadow-lg">
                                                 {slide.title}
                                             </div>
@@ -154,7 +154,7 @@ export function PublicHome(props: IHomeHeroProps) {
                     transition={{ duration: 1 }}
                     viewport={{once:true}}
                     className='py-5 md:py-10 bg-muted/20'>
-                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 max-w-7xl space-y-5">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 max-w-7xl space-y-5">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                             <div className="relative overflow-hidden rounded-xl shadow-xl aspect-5/3">
                                 <Image
@@ -392,7 +392,7 @@ export function PublicHome(props: IHomeHeroProps) {
                     {/* colorful background gradient */}
                     <div className="absolute inset-0 bg-linear-to-br from-teal-100 via-indigo-100 to-transparent" />
                     <div className="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_30%_20%,#fefcbf_0%,transparent_50%)]" />
-                    <div className="container px-4 py-2 relative z-10">
+                    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-10 max-w-7xl space-y-5 relative z-10">
                         <div className="max-w-4xl mx-auto text-center space-y-3">
                             <h2 className="text-xl font-bold tracking-tight text-foreground">
                                 Ready to Start Your Child's Bright Future At One Mission School?

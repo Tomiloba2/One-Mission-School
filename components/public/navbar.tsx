@@ -82,7 +82,8 @@ export function Navbar(props: INavBarProps) {
                                                 className={cn('text-md font-medium transition-colors hover:text-brand-dark ',
                                                     isActive ? " text-brand-primary font-semibold" : "text-muted-foreground")}
                                                 key={item.href}
-                                                href={item.href}>
+                                                href={item.href}
+                                                >
                                                 {item.title}
                                             </Link>
                                         )
