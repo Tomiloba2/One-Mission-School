@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  role          Role      @default(student)
+  phone         String
+  terms         Boolean
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  admin         Admin?
+  parent        Parent?
+  student       Student?
+  teacher       Teacher?
+  accounts      Account[]
+  sessions      Session[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
+}
+
+model Student {
+  id          String   @id @default(cuid())
+  gender      Gender
+  dateOfBirth DateTime
+  firstName   String
+  lastName    String
+  middleName  String?
+  parentName  String
+  parentEmail String
+  parentPhone String
+  plan        Plan     @default(free)
+  userId      String   @unique
+  paymentRef  String?
+  schoolId    String
+  classLevel  String?
+  users       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Parent {
+  id           String     @id @default(cuid())
+  userId       String     @unique
+  firstName    String
+  lastName     String
+  middleName   String?
+  numChildren  String
+  relationship String
+  children     Children[]
+  users        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Children {
+  id       String  @id @default(cuid())
+  schoolId String
+  parentId String?
+  parent   Parent? @relation(fields: [parentId], references: [id], onDelete: Cascade)
+}
+
+model Teacher {
+  id     String @id @default(cuid())
+  userId String @unique
+  users  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Admin {
+  id     String @id @default(cuid())
+  userId String @unique
+  users  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  student
+  teacher
+  parent
+  admin
+}
+
+enum Gender {
+  male
+  female
+}
+
+enum Plan {
+  free
+  prerecorded
+  interactive
+  bundle
+}

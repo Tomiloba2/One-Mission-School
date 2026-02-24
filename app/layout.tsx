@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/lib/tanstack-query/providers";
+import { QueryErrorBoundary } from "@/lib/tanstack-query/errorBoundary";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          <QueryErrorBoundary>
+            {children}
+            <Toaster position="top-right" richColors closeButton/>
+          </QueryErrorBoundary>
+        </Providers>
       </body>
     </html>
   );
