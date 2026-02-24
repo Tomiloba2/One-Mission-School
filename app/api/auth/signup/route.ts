@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { validateBody } from "../../validate";
 import { userSignupSchema } from "@/lib/schema/authSchema";
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
     try {
         const validate = await validateBody(request, userSignupSchema)
         if (!validate.success) {
